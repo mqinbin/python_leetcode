@@ -16,7 +16,7 @@ class Solution:
         # 1234    4   1    0 1
         while end <= n_len:
             answer.append(n_str[start:end])
-            start =end
+            start = end
             end +=3
         return ".".join(answer)
 # @lc code=end
