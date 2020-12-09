@@ -7,21 +7,38 @@
 # @lc code=start
 class Solution:
     def search(self, nums: List[int], target: int) -> int:
-        left = 0
-        right = len(nums)
+        # if len(nums) == 1 :
+        #     return 0 if target == nums[0] else -1
+                
+        left , right = 0 , len(nums)
         while left < right:
-            mid = (left + right) // 2
-            if nums[mid] == target:
-                return mid
-            if target < nums[left] :
-                left = mid + 1
-                continue
-            if target > nums[right - 1]:
-            
-            
-            if nums[mid] < target:
-                left = mid + 1
+            rotatePos = (left + right) // 2
+            if rotatePos == len(nums) - 1:
+                break
+            if nums[rotatePos]>nums[rotatePos+1]:
+                rotatePos += 1
+                break
+            if nums[rotatePos]>nums[left]:
+                left = rotatePos + 1
             else:
-                right = mid
+                right = rotatePos
+        
+        def foundIndex(nums, left, right,target):
+            while left < right:
+                mid = (left + right) // 2
+                if nums[mid] == target:
+                    return mid
+                if target>nums[mid]:
+                    left = mid + 1
+                else:
+                    right = mid
+            return -1
+        
+        leftPart = foundIndex(nums,0,rotatePos,target)
+        if leftPart != -1:
+            return leftPart
+        rightPart = foundIndex(nums,rotatePos,len(nums),target)
+        return rightPart
+
 # @lc code=end
 
