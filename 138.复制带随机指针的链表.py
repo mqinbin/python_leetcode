@@ -15,20 +15,50 @@ class Node:
 """
 
 class Solution:
-    def copyRandomList(self, head: 'Node') -> 'Node':
-        l = []
-        cur = head
-        while cur:
-            l.append[Node(cur.val)]
-            cur = cur.next
-        
-        cur = head
-        n = len(l)
-        for i in range(n):
-            l[i].next = None if  i == n-1 else l[i+1]
-            l[i].random = cur.random
 
-            cur = cur.next
+    # 字典
+    def copyRandomList(self, head: 'Node') -> 'Node':
+        dic = {}
+        node = head
+        while node:
+            dic[node] = Node(node.val)
+            node = node.next
+        node = head
+        while node:
+            dic[node].next = dic[node.next] if node.next else None
+            dic[node].random = dic[node.random] if node.random else None
+            node = node.next
+        return dic[head] if head  else None
+
+
+
+    # 连续链表
+    # def copyRandomList(self, head: 'Node') -> 'Node':
+
+    #     node = head
+    #     while node:
+    #         temp = node.next
+    #         newNode = Node(node.val, temp)
+    #         node.next = newNode
+    #         node = node.next.next
+
+    #     node = head
+    #     while node:
+    #         node.next.random = node.random.next if node.random else None
+    #         node = node.next.next
         
+    #     dummy = Node(0)
+    #     cloneNode = dummy
+    #     node = head
+    #     while node:
+    #         cloneNode.next  = node.next
+    #         cloneNode = node.next
+    #         node.next = cloneNode.next
+    #         node = node.next
+
+
+    #     return dummy.next
+
+
 # @lc code=end
 
